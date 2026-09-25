@@ -14,10 +14,23 @@ st.set_page_config(page_title="Prompt Technique Explorer", page_icon="🧪")
 st.title("🧪 Prompt Technique Explorer")
 st.caption("See zero-shot, few-shot, and chain-of-thought side by side, on your own input.")
 
+st.markdown(
+    "This tool sends the **same input** to Google's Gemini model using three "
+    "different prompting techniques, so you can see how the technique changes "
+    "the output — not just the wording, but the *shape* of the answer."
+)
+
+TECHNIQUE_INFO = {
+    "Zero-shot": "No examples given — a direct answer. **Expect:** a free-form response, length and format vary.",
+    "Few-shot (Sentiment Classifier)": "3 example reviews are shown to the model first. **Expect:** a single word — Positive, Negative, or Neutral.",
+    "Chain-of-thought (Reasoning)": "The model is asked to reason step by step first. **Expect:** a short explanation followed by a final answer.",
+}
+
 technique = st.selectbox(
     "Choose a technique",
     ["Zero-shot", "Few-shot (Sentiment Classifier)", "Chain-of-thought (Reasoning)"],
 )
+st.info(TECHNIQUE_INFO[technique])
 
 user_input = st.text_area(
     "Your input",
